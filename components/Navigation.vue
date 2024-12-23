@@ -1,330 +1,82 @@
 <template>
-    <div class="bg-white">
-        <!-- Mobile menu -->
-        <TransitionRoot :show="open" as="template">
-            <Dialog class="relative z-40 lg:hidden" @close="open = false">
-                <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
-                    <div class="fixed inset-0 bg-black/25" />
-                </TransitionChild>
-
-                <div class="fixed inset-0 z-40 flex">
-                    <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
-                        <DialogPanel class="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
-                            <div class="flex px-4 pb-2 pt-5">
-                                <button class="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400" type="button" @click="open = false">
-                                    <span class="absolute -inset-0.5" />
-                                    <span class="sr-only">Close menu</span>
-                                    <XMarkIcon aria-hidden="true" class="size-6" />
-                                </button>
-                            </div>
-
-                            <!-- Links -->
-                            <TabGroup as="div" class="mt-2">
-                                <div class="border-b border-gray-200">
-                                    <TabList class="-mb-px flex space-x-8 px-4">
-                                        <Tab v-for="category in navigation.categories" :key="category.name" v-slot="{ selected }" as="template">
-                                            <button :class="[selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900', 'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium']">{{ category.name }}</button>
-                                        </Tab>
-                                    </TabList>
-                                </div>
-                                <TabPanels as="template">
-                                    <TabPanel v-for="category in navigation.categories" :key="category.name" class="space-y-10 px-4 pb-8 pt-10">
-                                        <div class="grid grid-cols-2 gap-x-4">
-                                            <div v-for="item in category.featured" :key="item.name" class="group relative text-sm">
-                                                <img :alt="item.imageAlt" :src="item.imageSrc" class="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75" />
-                                                <a :href="item.href" class="mt-6 block font-medium text-gray-900">
-                                                    <span aria-hidden="true" class="absolute inset-0 z-10" />
-                                                    {{ item.name }}
-                                                </a>
-                                                <p aria-hidden="true" class="mt-1">Shop now</p>
-                                            </div>
-                                        </div>
-                                        <div v-for="section in category.sections" :key="section.name">
-                                            <p :id="`${category.id}-${section.id}-heading-mobile`" class="font-medium text-gray-900">{{ section.name }}</p>
-                                            <ul :aria-labelledby="`${category.id}-${section.id}-heading-mobile`" class="mt-6 flex flex-col space-y-6" role="list">
-                                                <li v-for="item in section.items" :key="item.name" class="flow-root">
-                                                    <a :href="item.href" class="-m-2 block p-2 text-gray-500">{{ item.name }}</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </TabPanel>
-                                </TabPanels>
-                            </TabGroup>
-
-                            <div class="space-y-6 border-t border-gray-200 px-4 py-6">
-                                <div v-for="page in navigation.pages" :key="page.name" class="flow-root">
-                                    <a :href="page.href" class="-m-2 block p-2 font-medium text-gray-900">{{ page.name }}</a>
-                                </div>
-                            </div>
-
-                            <div class="space-y-6 border-t border-gray-200 px-4 py-6">
-                                <div class="flow-root">
-                                    <a class="-m-2 block p-2 font-medium text-gray-900" href="#">Sign in</a>
-                                </div>
-                                <div class="flow-root">
-                                    <a class="-m-2 block p-2 font-medium text-gray-900" href="#">Create account</a>
-                                </div>
-                            </div>
-
-                            <div class="border-t border-gray-200 px-4 py-6">
-                                <a class="-m-2 flex items-center p-2" href="#">
-                                    <img alt="" class="block h-auto w-5 shrink-0" src="https://tailwindui.com/plus/img/flags/flag-canada.svg" />
-                                    <span class="ml-3 block text-base font-medium text-gray-900">CAD</span>
-                                    <span class="sr-only">, change currency</span>
-                                </a>
-                            </div>
-                        </DialogPanel>
-                    </TransitionChild>
+    <header>
+        <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
+            <!--LOGO-->
+            <div class="flex lg:flex-1">
+                <a class="-m-1.5 p-1.5" href="#">
+                    <span class="sr-only">Your Company</span>
+                    <img alt="" class="h-8 w-auto"
+                         src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"/>
+                </a>
+            </div>
+            <!--Mobile Menu Icon-->
+            <div class="flex lg:hidden">
+                <button class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                        type="button" @click="mobileMenuOpen = true">
+                    <span class="sr-only">Open main menu</span>
+                    <Bars3Icon aria-hidden="true" class="size-6"/>
+                </button>
+            </div>
+            <!--Nav Items-->
+            <div class="hidden lg:flex lg:gap-x-12">
+                <a v-for="item in navigation" :key="item.name" :href="item.href"
+                   class="text-sm/6 font-semibold text-gray-900">{{ item.name }}</a>
+            </div>
+            <!--login & signup-->
+            <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                <a class="text-sm/6 font-semibold text-gray-900" href="#">Log in <span
+                    aria-hidden="true">&rarr;</span></a>
+            </div>
+        </nav>
+        <!--Mobile Menu-->
+        <Dialog :open="mobileMenuOpen" class="lg:hidden" @close="mobileMenuOpen = false">
+            <div class="fixed inset-0 z-50"/>
+            <DialogPanel
+                class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                <div class="flex items-center justify-between">
+                    <a class="-m-1.5 p-1.5" href="#">
+                        <span class="sr-only">Your Company</span>
+                        <img alt="" class="h-8 w-auto"
+                             src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"/>
+                    </a>
+                    <button class="-m-2.5 rounded-md p-2.5 text-gray-700" type="button"
+                            @click="mobileMenuOpen = false">
+                        <span class="sr-only">Close menu</span>
+                        <XMarkIcon aria-hidden="true" class="size-6"/>
+                    </button>
                 </div>
-            </Dialog>
-        </TransitionRoot>
-
-        <header class="relative bg-white">
-            <header class="relative bg-white">
-                <div class="ml-auto flex flex items-center justify-between h-10 bg-black px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-                    <div>CAD</div>
-                        <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                            <a class="text-sm font-medium text-gray-500 hover:text-white" href="#">Sign in</a>
-                            <span aria-hidden="true" class="h-6 w-px bg-gray-200" />
-                            <a class="text-sm font-medium text-gray-700 hover:text-gray-800" href="#">Create account</a>
+                <div class="mt-6 flow-root">
+                    <div class="-my-6 divide-y divide-gray-500/10">
+                        <div class="space-y-2 py-6">
+                            <a v-for="item in navigation" :key="item.name" :href="item.href"
+                               class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">{{
+                                    item.name
+                                }}</a>
                         </div>
-                </div>
-            </header>
-
-            <nav aria-label="Top" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="border-b border-gray-200">
-                    <div class="flex h-16 items-center">
-                        <button class="relative rounded-md bg-white p-2 text-gray-400 lg:hidden" type="button" @click="open = true">
-                            <span class="absolute -inset-0.5" />
-                            <span class="sr-only">Open menu</span>
-                            <Bars3Icon aria-hidden="true" class="size-6" />
-                        </button>
-
-                        <!-- Logo -->
-                        <div class="ml-4 flex lg:ml-0">
-                            <a href="#">
-                                <span class="sr-only">Your Company</span>
-                                <img alt="" class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" />
-                            </a>
-                        </div>
-
-                        <!-- Flyout menus -->
-                        <PopoverGroup class="hidden lg:ml-8 lg:block lg:self-stretch">
-                            <div class="flex h-full space-x-8">
-                                <Popover v-for="category in navigation.categories" :key="category.name" v-slot="{ open }" class="flex">
-                                    <div class="relative flex">
-                                        <PopoverButton :class="[open ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-700 hover:text-gray-800', 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out']">{{ category.name }}</PopoverButton>
-                                    </div>
-
-                                    <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                                        <PopoverPanel class="absolute inset-x-0 top-full text-sm text-gray-500">
-                                            <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-                                            <div aria-hidden="true" class="absolute inset-0 top-1/2 bg-white shadow" />
-
-                                            <div class="relative bg-white">
-                                                <div class="mx-auto max-w-7xl px-8">
-                                                    <div class="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                                                        <div class="col-start-2 grid grid-cols-2 gap-x-8">
-                                                            <div v-for="item in category.featured" :key="item.name" class="group relative text-base sm:text-sm">
-                                                                <img :alt="item.imageAlt" :src="item.imageSrc" class="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75" />
-                                                                <a :href="item.href" class="mt-6 block font-medium text-gray-900">
-                                                                    <span aria-hidden="true" class="absolute inset-0 z-10" />
-                                                                    {{ item.name }}
-                                                                </a>
-                                                                <p aria-hidden="true" class="mt-1">Shop now</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                                            <div v-for="section in category.sections" :key="section.name">
-                                                                <p :id="`${section.name}-heading`" class="font-medium text-gray-900">{{ section.name }}</p>
-                                                                <ul :aria-labelledby="`${section.name}-heading`" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4" role="list">
-                                                                    <li v-for="item in section.items" :key="item.name" class="flex">
-                                                                        <a :href="item.href" class="hover:text-gray-800">{{ item.name }}</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </PopoverPanel>
-                                    </transition>
-                                </Popover>
-
-                                <a v-for="page in navigation.pages" :key="page.name" :href="page.href" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{{ page.name }}</a>
-                            </div>
-                        </PopoverGroup>
-
-                        <!-- Icons -->
-                        <div class="ml-auto flex items-center">
-
-                            <!-- Search -->
-                            <div class="flex lg:ml-6">
-                                <a class="p-2 text-gray-400 hover:text-gray-500" href="#">
-                                    <span class="sr-only">Search</span>
-                                    <MagnifyingGlassIcon aria-hidden="true" class="size-6" />
-                                </a>
-                            </div>
-
-                            <!-- Cart -->
-                            <div class="ml-4 flow-root lg:ml-6">
-                                <a class="group -m-2 flex items-center p-2" href="#">
-                                    <ShoppingBagIcon aria-hidden="true" class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" />
-                                    <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
-                                    <span class="sr-only">items in cart, view bag</span>
-                                </a>
-                            </div>
+                        <div class="py-6">
+                            <a class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                               href="#">Log in</a>
                         </div>
                     </div>
                 </div>
-            </nav>
-        </header>
-    </div>
+            </DialogPanel>
+        </Dialog>
+    </header>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import {
-    Dialog,
-    DialogPanel,
-    Popover,
-    PopoverButton,
-    PopoverGroup,
-    PopoverPanel,
-    Tab,
-    TabGroup,
-    TabList,
-    TabPanel,
-    TabPanels,
-    TransitionChild,
-    TransitionRoot,
-} from '@headlessui/vue';
-import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { Dialog, DialogPanel, } from '@headlessui/vue';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 
-const navigation = {
-    categories: [
-        {
-            id: 'women',
-            name: 'Women',
-            featured: [
-                {
-                    name: 'New Arrivals',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-01.jpg',
-                    imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-                },
-                {
-                    name: 'Basic Tees',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-02.jpg',
-                    imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-                },
-            ],
-            sections: [
-                {
-                    id: 'clothing',
-                    name: 'Clothing',
-                    items: [
-                        { name: 'Tops', href: '#' },
-                        { name: 'Dresses', href: '#' },
-                        { name: 'Pants', href: '#' },
-                        { name: 'Denim', href: '#' },
-                        { name: 'Sweaters', href: '#' },
-                        { name: 'T-Shirts', href: '#' },
-                        { name: 'Jackets', href: '#' },
-                        { name: 'Activewear', href: '#' },
-                        { name: 'Browse All', href: '#' },
-                    ],
-                },
-                {
-                    id: 'accessories',
-                    name: 'Accessories',
-                    items: [
-                        { name: 'Watches', href: '#' },
-                        { name: 'Wallets', href: '#' },
-                        { name: 'Bags', href: '#' },
-                        { name: 'Sunglasses', href: '#' },
-                        { name: 'Hats', href: '#' },
-                        { name: 'Belts', href: '#' },
-                    ],
-                },
-                {
-                    id: 'brands',
-                    name: 'Brands',
-                    items: [
-                        { name: 'Full Nelson', href: '#' },
-                        { name: 'My Way', href: '#' },
-                        { name: 'Re-Arranged', href: '#' },
-                        { name: 'Counterfeit', href: '#' },
-                        { name: 'Significant Other', href: '#' },
-                    ],
-                },
-            ],
-        },
-        {
-            id: 'men',
-            name: 'Men',
-            featured: [
-                {
-                    name: 'New Arrivals',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-                    imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
-                },
-                {
-                    name: 'Artwork Tees',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/category-page-02-image-card-06.jpg',
-                    imageAlt:
-                        'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-                },
-            ],
-            sections: [
-                {
-                    id: 'clothing',
-                    name: 'Clothing',
-                    items: [
-                        { name: 'Tops', href: '#' },
-                        { name: 'Pants', href: '#' },
-                        { name: 'Sweaters', href: '#' },
-                        { name: 'T-Shirts', href: '#' },
-                        { name: 'Jackets', href: '#' },
-                        { name: 'Activewear', href: '#' },
-                        { name: 'Browse All', href: '#' },
-                    ],
-                },
-                {
-                    id: 'accessories',
-                    name: 'Accessories',
-                    items: [
-                        { name: 'Watches', href: '#' },
-                        { name: 'Wallets', href: '#' },
-                        { name: 'Bags', href: '#' },
-                        { name: 'Sunglasses', href: '#' },
-                        { name: 'Hats', href: '#' },
-                        { name: 'Belts', href: '#' },
-                    ],
-                },
-                {
-                    id: 'brands',
-                    name: 'Brands',
-                    items: [
-                        { name: 'Re-Arranged', href: '#' },
-                        { name: 'Counterfeit', href: '#' },
-                        { name: 'Full Nelson', href: '#' },
-                        { name: 'My Way', href: '#' },
-                    ],
-                },
-            ],
-        },
-    ],
-    pages: [
-        { name: 'Company', href: '#' },
-        { name: 'Stores', href: '#' },
-    ],
-}
+const navigation = [
+    { name: 'Product', href: '#' },
+    { name: 'Features', href: '#' },
+    { name: 'Marketplace', href: '#' },
+    { name: 'Company', href: '#' },
+]
 
-const open = ref(false);
+const mobileMenuOpen = ref(false)
 
 </script>
 
