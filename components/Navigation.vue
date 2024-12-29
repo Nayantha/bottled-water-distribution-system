@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
+        <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8 z-50 z-50 relative dark:bg-black">
             <!--LOGO-->
             <div class="flex lg:flex-1">
                 <a class="-m-1.5 p-1.5" href="#">
@@ -65,15 +65,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { Dialog, DialogPanel, } from '@headlessui/vue';
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
+import {ref} from 'vue';
+import {Dialog, DialogPanel,} from '@headlessui/vue';
+import {Bars3Icon, XMarkIcon} from '@heroicons/vue/24/outline';
 
 const navigation = [
-    { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+    {name: 'Product', href: '#'},
+    {name: 'Features', href: '#'},
+    {name: 'Marketplace', href: '#'},
+    {name: 'Company', href: '#'},
 ]
 
 const mobileMenuOpen = ref(false)
