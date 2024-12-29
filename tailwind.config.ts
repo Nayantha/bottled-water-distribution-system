@@ -14,6 +14,7 @@ export default {
                 'default': {
                     light: '#111827', // gray-900
                     dark: '#E5E7EB',  // gray-200
+                    'hover': 'gray',    // gray-50
                 }
             },
             backgroundColor: {
