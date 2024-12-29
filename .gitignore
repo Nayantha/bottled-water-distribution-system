@@ -24,4 +24,4 @@ logs
 !.env.example
 
 # prisma migration files
-./prisma/migrations
+./prisma/migrations/
