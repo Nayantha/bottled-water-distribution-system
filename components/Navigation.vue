@@ -23,7 +23,8 @@
                    class="text-sm/6 font-semibold text-gray-900">{{ item.name }}</a>
             </div>
             <!--login & signup-->
-            <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-4">
+                <ThemeSwitch/>
                 <a class="text-sm/6 font-semibold text-gray-900" href="#">Log in <span
                     aria-hidden="true">&rarr;</span></a>
             </div>
@@ -54,9 +55,8 @@
                                 }}</a>
                         </div>
                         <div class="py-6">
-                            <ThemeSwitch/>
                             <a class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                               href="#">Log in</a>
+                               href="/login">Log in</a>
                         </div>
                     </div>
                 </div>
