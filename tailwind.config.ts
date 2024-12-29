@@ -15,6 +15,12 @@ export default {
           light: '#111827', // gray-900
           dark: '#E5E7EB',  // gray-200
         }
+      },
+      backgroundColor: {
+        'default': {
+          light: 'white',
+          dark: 'black',
+        }
       }
     },
   },
