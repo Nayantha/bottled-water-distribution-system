@@ -20,12 +20,12 @@
             <!--Nav Items-->
             <div class="hidden lg:flex lg:gap-x-12">
                 <a v-for="item in navigation" :key="item.name" :href="item.href"
-                   class="text-sm/6 font-semibold text-gray-900">{{ item.name }}</a>
+                   class="text-sm/6 font-semibold text-default-light dark:text-default-dark">{{ item.name }}</a>
             </div>
             <!--login & signup-->
             <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-4">
                 <ThemeSwitch/>
-                <a class="text-sm/6 font-semibold text-gray-900" href="#">Log in <span
+                <a class="text-sm/6 font-semibold text-default-light dark:text-default-dark" href="#">Log in <span
                     aria-hidden="true">&rarr;</span></a>
             </div>
         </nav>
