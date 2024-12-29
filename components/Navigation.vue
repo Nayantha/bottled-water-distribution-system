@@ -10,7 +10,8 @@
                 </a>
             </div>
             <!--Mobile Menu Icon-->
-            <div class="flex lg:hidden">
+            <div class="flex lg:hidden gap-4">
+                <ThemeSwitch/>
                 <button class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
                         type="button" @click="mobileMenuOpen = true">
                     <span class="sr-only">Open main menu</span>
