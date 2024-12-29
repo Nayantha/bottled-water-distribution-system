@@ -1,9 +1,7 @@
 <template>
-    <div class="flex flex-row items-center justify-center">
-        <button @click="toggleTheme">
-            <Icon :icon="colorMode.preference === 'dark' ? 'radix-icons:moon' : 'radix-icons:sun'"/>
-        </button>
-    </div>
+    <button @click="toggleTheme">
+        <Icon :icon="colorMode.preference === 'dark' ? 'radix-icons:moon' : 'radix-icons:sun'"/>
+    </button>
 </template>
 
 <script lang="ts" setup>
