@@ -1,6 +1,7 @@
 <template>
     <button @click="toggleTheme">
-        <Icon :icon="colorMode.preference === 'dark' ? 'radix-icons:moon' : 'radix-icons:sun'" class="dark:text-white"/>
+        <Icon :icon="colorMode.preference === 'dark' ? 'radix-icons:moon' : 'radix-icons:sun'"
+              class="dark:text-white hover:text-default-hover"/>
     </button>
 </template>
 
