@@ -10,5 +10,11 @@ export default defineEventHandler(async (event) => {
 
     const registerUser = RegisterUserRequest.constructFromJson(body as RegisterUserRequestInterface);
 
+    if (registerUser.validateInputs()) {
+        throw createError({
+            statusCode: 400,
+            message: 'All fields are required'
+        })
+    }
 
 })
