@@ -1,4 +1,3 @@
-<!-- pages/register.vue -->
 <template>
     <div class="flex min-h-full">
         <div class="flex flex-1 flex-col justify-center">
