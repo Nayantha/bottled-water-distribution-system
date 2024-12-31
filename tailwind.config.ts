@@ -12,8 +12,8 @@ export default {
         extend: {
             textColor: {
                 'default': {
-                    light: '#111827', // gray-900
-                    dark: '#E5E7EB',  // gray-200
+                    dark: '#111827', // gray-900
+                    light: '#E5E7EB',  // gray-200
                     'hover': 'gray',    // gray-50
                 }
             },
