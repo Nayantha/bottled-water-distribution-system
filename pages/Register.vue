@@ -7,12 +7,11 @@
                     <div>
                         <img alt="Your Company" class="mx-auto h-10 w-auto"
                              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"/>
-                        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">Sign in to your
-                            account</h2>
+                        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">Create an Account</h2>
                         <p class="mt-2 text-center text-sm text-gray-600">
-                            Not a member?
-                            <a class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" href="#">Start a 14
-                                day free trial</a>
+                            Already a member?
+                            <a class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                               href="/login">Login</a>
                         </p>
                     </div>
 
