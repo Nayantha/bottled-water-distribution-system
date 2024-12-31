@@ -5,6 +5,18 @@ export interface RegisterUserRequestInterface {
     password: string;
 }
 
+interface ValidationRule {
+    validate: (value: string) => boolean;
+    message: string;
+}
+
+interface ValidationFields {
+    email: string;
+    password: string;
+    username: string;
+    name: string;
+}
+
 export interface ValidationResult {
     valid: boolean;
     message: string;
@@ -27,27 +39,33 @@ export class RegisterUserRequest {
         return new RegisterUserRequest(JsonBody.email, JsonBody.name, JsonBody.username, JsonBody.password);
     }
 
-    public validateInputs(): ValidationResult {
-
-        const requiredFields = {
-            email: this.email,
-            password: this.password,
-            username: this.username,
-            name: this.name
+    public validateInputs(this: ValidationFields): ValidationResult {
+        const validationRules: Record<keyof ValidationFields, ValidationRule> = {
+            email: {
+                validate: (value: string) => Boolean(value?.trim() && value.includes('@')),
+                message: 'Email is missing or invalid.'
+            },
+            password: {
+                validate: (value: string) => Boolean(value?.trim()),
+                message: 'Password is missing.'
+            },
+            username: {
+                validate: (value: string) => Boolean(value?.trim()),
+                message: 'Username is missing.'
+            },
+            name: {
+                validate: (value: string) => Boolean(value?.trim()),
+                message: 'Name is missing.'
+            }
         };
 
-        const missingFields = Object.entries(requiredFields)
-            .filter(([_, value]) => !value?.trim())
-            .map(([field]) => `${field} is missing.`);
-
-        if (missingFields.length === 0) {
-            return {valid: true, message: 'valid'};
-        }
+        const failures = Object.entries(validationRules)
+            .filter(([field, rule]) => !rule.validate(this[field as keyof ValidationFields]))
+            .map(([_, rule]) => rule.message);
 
         return {
-            valid: false,
-            message: missingFields.join('\n')
+            valid: failures.length === 0,
+            message: failures.length ? failures.join('\n') : 'valid'
         };
-
     }
 }
