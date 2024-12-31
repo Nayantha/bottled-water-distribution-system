@@ -29,5 +29,4 @@ export class APIError extends Error {
             error.details ?? {}
         );
     }
-
 }
