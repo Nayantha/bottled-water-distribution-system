@@ -1,22 +1,22 @@
 export interface ApiErrorInterface {
     message: string;
-    code?: string;
-    details?: Record<string, unknown>;
+    statusCode: number;
+    url: string;
 }
 
 export class APIError extends Error {
-    public readonly code: string;
-    public readonly details: Record<string, unknown>;
+    public readonly statusCode: number;
+    public readonly url: string;
 
     public constructor(
         message: string,
-        code: string = '',
-        details: Record<string, unknown> = {}
+        code: number,
+        url: string
     ) {
         super(message);
         this.name = 'APIError';
-        this.code = code;
-        this.details = details;
+        this.statusCode = code;
+        this.url = url;
 
         // This is necessary for proper error inheritance in TypeScript
         Object.setPrototypeOf(this, APIError.prototype);
@@ -25,8 +25,8 @@ export class APIError extends Error {
     public static fromJson(error: ApiErrorInterface): APIError {
         return new APIError(
             error.message,
-            error.code ?? '',
-            error.details ?? {}
+            error.statusCode,
+            error.url
         );
     }
 }
