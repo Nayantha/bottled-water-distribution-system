@@ -195,11 +195,11 @@ const onSubmit = handleSubmit(async (values) => {
         <div>
             <button
                 :disabled="loading"
-                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 type="submit"
             >
                 <span v-if="loading">Processing...</span>
-                <span v-if="!loading">Sign in</span>
+                <span v-else>Sign in</span>
             </button>
         </div>
     </form>
