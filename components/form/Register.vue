@@ -62,7 +62,7 @@ const onSubmit = handleSubmit(async (values) => {
         if (!response.ok) {
             const data = await response.json()
 
-            const errorData = new APIError.fromJson(data as ApiErrorInterface);
+            const errorData = APIError.fromJson(data as ApiErrorInterface);
 
             error.value = errorData.message || 'Registration failed';
 
