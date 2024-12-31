@@ -5,6 +5,11 @@ export interface RegisterUserRequestInterface {
     password: string;
 }
 
+export interface ValidationResult {
+    valid: boolean;
+    message: string;
+}
+
 export class RegisterUserRequest {
     email: string;
     name: string;
