@@ -98,9 +98,6 @@
                 </label>
             </div>
 
-            <div class="text-sm">
-                <a class="font-semibold text-indigo-600 hover:text-indigo-500" href="#">Forgot password?</a>
-            </div>
         </div>
 
         <div>
