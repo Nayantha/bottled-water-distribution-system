@@ -21,6 +21,38 @@
         </div>
 
         <div>
+            <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="username">
+                Username
+            </label>
+            <div class="mt-2">
+                <input
+                    id="username"
+                    autocomplete="username"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    name="username"
+                    required
+                    type="text"
+                />
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="name">
+                Name
+            </label>
+            <div class="mt-2">
+                <input
+                    id="name"
+                    autocomplete="name"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    name="name"
+                    required
+                    type="text"
+                />
+            </div>
+        </div>
+
+        <div>
             <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="password">
                 Password
             </label>
@@ -36,16 +68,34 @@
             </div>
         </div>
 
+        <div>
+            <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light"
+                   for="confirmPassword">
+                Re-type Password
+            </label>
+            <div class="mt-2">
+                <input
+                    id="confirmPassword"
+                    autocomplete="current-password"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    name="confirmPassword"
+                    required
+                    type="password"
+                />
+            </div>
+        </div>
+
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <input
-                        id="remember-me"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        name="remember-me"
-                        type="checkbox"
+                    id="remember-me"
+                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    name="remember-me"
+                    type="checkbox"
                 />
-                <label class="ml-3 block text-sm text-default-dark dark:text-default-light" for="remember-me">Remember
-                    me</label>
+                <label class="ml-3 block text-sm text-default-dark dark:text-default-light" for="remember-me">
+                    Remember me
+                </label>
             </div>
 
             <div class="text-sm">
