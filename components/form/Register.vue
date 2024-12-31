@@ -48,14 +48,12 @@ const onSubmit = handleSubmit(async (values) => {
 
         const registerUserRequest = RegisterUserRequest.constructFromJson(values);
 
-        console.log(registerUserRequest);
-
         const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({})
+            body: JSON.stringify(registerUserRequest)
         })
 
         if (!response.ok) {
