@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import * as yup from 'yup';
+import {useForm} from "vee-validate";
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Invalid email format'),
-    username: yup.string().required('Username is required').min(5, 'Username must be at least 3 characters'),
+    username: yup.string()
+        .required('Username is required')
+        .min(5, 'Username must be at least 5 characters'),
     name: yup.string().required('Name is required'),
     password: yup.string()
         .required('Password is required')
@@ -13,6 +16,17 @@ const schema = yup.object({
     confirmPassword: yup.string()
         .required('Please confirm your password')
         .oneOf([yup.ref('password')], 'Passwords must match')
+})
+
+const {handleSubmit, errors, resetForm} = useForm({
+    validationSchema: schema,
+    initialValues: {
+        email: 'email@mail.com',
+        password: '1234567890Az',
+        name: 'name1',
+        username: 'name1',
+        confirmPassword: '1234567890Az'
+    }
 })
 </script>
 
