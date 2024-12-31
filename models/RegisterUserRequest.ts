@@ -27,30 +27,27 @@ export class RegisterUserRequest {
         return new RegisterUserRequest(JsonBody.email, JsonBody.name, JsonBody.username, JsonBody.password);
     }
 
-    public validateInputs() {
-        let message = "";
+    public validateInputs(): ValidationResult {
 
-        if (!this.email || this.email.replaceAll(" ", "").length === 0 || this.email.replaceAll(" ", "") === "") {
-            message += "email is missing.\n";
+        const requiredFields = {
+            email: this.email,
+            password: this.password,
+            username: this.username,
+            name: this.name
+        };
+
+        const missingFields = Object.entries(requiredFields)
+            .filter(([_, value]) => !value?.trim())
+            .map(([field]) => `${field} is missing.`);
+
+        if (missingFields.length === 0) {
+            return {valid: true, message: 'valid'};
         }
 
-        if (!this.password || this.password.replaceAll(" ", "").length === 0 || this.password.replaceAll(" ", "") === "") {
-            message += "password is missing.\n";
-        }
-
-        if (!this.username || this.username.replaceAll(" ", "").length === 0 || this.username.replaceAll(" ", "") === "") {
-            message += "username is missing.\n";
-        }
-
-        if (!this.name || this.name.replaceAll(" ", "").length === 0 || this.name.replaceAll(" ", "") === "") {
-            message += "name is missing.\n";
-        }
-
-        if (!message) {
-            return {valid: true, message: 'valid'}
-        } else {
-            return {valid: false, message: message}
-        }
+        return {
+            valid: false,
+            message: missingFields.join('\n')
+        };
 
     }
 }
