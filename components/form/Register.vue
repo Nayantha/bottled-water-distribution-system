@@ -46,6 +46,8 @@ const {value: confirmPassword} = useField('confirmPassword')
             <div class="mt-2">
                 <input
                     id="email"
+                    v-model="email"
+                    :class="{ 'border-red-500': errors.email }"
                     autocomplete="email"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     name="email"
@@ -53,6 +55,7 @@ const {value: confirmPassword} = useField('confirmPassword')
                     type="email"
                 />
             </div>
+            <p v-if="errors.email" class="mt-1 text-sm text-red-600">{{ errors.email }}</p>
         </div>
 
         <div>
@@ -62,6 +65,8 @@ const {value: confirmPassword} = useField('confirmPassword')
             <div class="mt-2">
                 <input
                     id="username"
+                    v-model="username"
+                    :class="{ 'border-red-500': errors.username }"
                     autocomplete="username"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     name="username"
@@ -69,6 +74,7 @@ const {value: confirmPassword} = useField('confirmPassword')
                     type="text"
                 />
             </div>
+            <p v-if="errors.username" class="mt-1 text-sm text-red-600">{{ errors.username }}</p>
         </div>
 
         <div>
@@ -78,6 +84,8 @@ const {value: confirmPassword} = useField('confirmPassword')
             <div class="mt-2">
                 <input
                     id="name"
+                    v-model="name"
+                    :class="{ 'border-red-500': errors.name }"
                     autocomplete="name"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     name="name"
@@ -85,6 +93,7 @@ const {value: confirmPassword} = useField('confirmPassword')
                     type="text"
                 />
             </div>
+            <p v-if="errors.name" class="mt-1 text-sm text-red-600">{{ errors.name }}</p>
         </div>
 
         <div>
@@ -94,6 +103,8 @@ const {value: confirmPassword} = useField('confirmPassword')
             <div class="mt-2">
                 <input
                     id="password"
+                    v-model="password"
+                    :class="{ 'border-red-500': errors.password }"
                     autocomplete="current-password"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     name="password"
@@ -101,6 +112,7 @@ const {value: confirmPassword} = useField('confirmPassword')
                     type="password"
                 />
             </div>
+            <p v-if="errors.password" class="mt-1 text-sm text-red-600">{{ errors.password }}</p>
         </div>
 
         <div>
@@ -111,6 +123,8 @@ const {value: confirmPassword} = useField('confirmPassword')
             <div class="mt-2">
                 <input
                     id="confirmPassword"
+                    v-model="confirmPassword"
+                    :class="{ 'border-red-500': errors.confirmPassword }"
                     autocomplete="current-password"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     name="confirmPassword"
@@ -118,6 +132,7 @@ const {value: confirmPassword} = useField('confirmPassword')
                     type="password"
                 />
             </div>
+            <p v-if="errors.confirmPassword" class="mt-1 text-sm text-red-600">{{ errors.confirmPassword }}</p>
         </div>
 
         <div class="flex items-center justify-between">
