@@ -1,5 +1,19 @@
 <script lang="ts" setup>
+import * as yup from 'yup';
 
+const schema = yup.object({
+    email: yup.string().required('Email is required').email('Invalid email format'),
+    username: yup.string().required('Username is required').min(5, 'Username must be at least 3 characters'),
+    name: yup.string().required('Name is required'),
+    password: yup.string()
+        .required('Password is required')
+        .min(8, 'Password must be at least 8 characters')
+        .matches(/[0-9]/, 'Password must contain at least one number')
+        .matches(/[A-Z]/, 'Password must contain at least one uppercase letter'),
+    confirmPassword: yup.string()
+        .required('Please confirm your password')
+        .oneOf([yup.ref('password')], 'Passwords must match')
+})
 </script>
 
 <template>
