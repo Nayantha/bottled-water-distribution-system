@@ -3,6 +3,8 @@ import * as yup from 'yup';
 import {useField, useForm} from "vee-validate";
 import {RegisterUserRequest} from "~/models/RegisterUserRequest";
 import {ref} from "vue";
+import type {ApiErrorInterface} from "~/models/APIError";
+import {APIError} from "~/models/APIError";
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Invalid email format'),
@@ -59,11 +61,19 @@ const onSubmit = handleSubmit(async (values) => {
 
         if (!response.ok) {
             const data = await response.json()
-            throw new Error(data.message || 'Registration failed')
+
+            const errorData = new APIError.fromJson(data as ApiErrorInterface);
+
+            error.value = errorData.message || 'Registration failed';
+
+            if (response.status === 409) {
+                error.value = 'An account with this email already exists';
+            }
+
+            return;
         }
 
         success.value = true;
-
         // Reset form on success
         resetForm()
         // redirect or success message
