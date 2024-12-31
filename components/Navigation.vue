@@ -23,14 +23,14 @@
             <!--Nav Items-->
             <div class="hidden lg:flex lg:gap-x-12">
                 <a v-for="item in navigation" :key="item.name" :href="item.href"
-                   class="text-sm/6 font-semibold text-default-light dark:text-default-dark hover:text-default-hover">
+                   class="text-sm/6 font-semibold text-default-dark dark:text-default-light hover:text-default-hover">
                     {{ item.name }}
                 </a>
             </div>
             <!--login & signup-->
             <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-4">
                 <ThemeSwitch/>
-                <a class="text-sm/6 font-semibold text-default-light dark:text-default-dark hover:text-default-hover"
+                <a class="text-sm/6 font-semibold text-default-dark dark:text-default-light hover:text-default-hover"
                    href="#">Log in <span aria-hidden="true">&rarr;</span></a>
             </div>
         </nav>
