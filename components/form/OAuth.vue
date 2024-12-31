@@ -22,7 +22,7 @@
         </a>
 
         <!--Github-->
-        <a class="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 text-default-dark dark:bg-default-dark dark:text-default-light hover:text-default-hover"
+        <a class="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 text-default-dark"
            href="#">
             <div class="dark:bg-white dark:rounded-full dark:p-0.5">
                 <svg aria-hidden="true" class="h-5 w-5 text-gray-900" fill="currentColor"
