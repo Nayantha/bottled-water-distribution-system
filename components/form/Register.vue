@@ -77,6 +77,10 @@ const onSubmit = handleSubmit(async (values) => {
 <template>
     <form class="space-y-6" @submit="onSubmit">
 
+        <div v-if="error" class="bg-red-50 text-red-600 p-4 rounded-lg mb-4">
+            {{ error }}
+        </div>
+
         <div>
             <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="email">
                 Email address
