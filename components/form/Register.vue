@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import * as yup from 'yup';
-import {useForm} from "vee-validate";
+import {useField, useForm} from "vee-validate";
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Invalid email format'),
@@ -28,6 +28,13 @@ const {handleSubmit, errors, resetForm} = useForm({
         confirmPassword: '1234567890Az'
     }
 })
+
+const {value: email} = useField('email')
+const {value: username} = useField('username')
+const {value: name} = useField('name')
+const {value: password} = useField('password')
+const {value: confirmPassword} = useField('confirmPassword')
+
 </script>
 
 <template>
