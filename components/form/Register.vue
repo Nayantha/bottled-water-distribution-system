@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import * as yup from 'yup';
 import {useField, useForm} from "vee-validate";
+import {RegisterUserRequest} from "~/models/RegisterUserRequest";
+import {ref} from "vue";
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Invalid email format'),
@@ -29,16 +31,54 @@ const {handleSubmit, errors, resetForm} = useForm({
     }
 })
 
+const loading = ref(false)
+const error = ref('')
+
 const {value: email} = useField('email')
 const {value: username} = useField('username')
 const {value: name} = useField('name')
 const {value: password} = useField('password')
 const {value: confirmPassword} = useField('confirmPassword')
 
+const onSubmit = handleSubmit(async (values) => {
+
+    try {
+        loading.value = true
+        error.value = ''
+
+        const registerUserRequest = RegisterUserRequest.constructFromJson(values);
+
+        console.log(registerUserRequest);
+
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+        })
+
+        if (!response.ok) {
+            const data = await response.json()
+            throw new Error(data.message || 'Registration failed')
+        }
+
+        // Reset form on success
+        resetForm()
+        // redirect or success message
+
+    } catch (err: any) {
+        error.value = err.message
+    } finally {
+        loading.value = false
+    }
+})
+
 </script>
 
 <template>
-    <form class="space-y-6">
+    <form class="space-y-6" @submit="onSubmit">
+
         <div>
             <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="email">
                 Email address
