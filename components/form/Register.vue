@@ -32,6 +32,7 @@ const {handleSubmit, errors, resetForm} = useForm({
 })
 
 const loading = ref(false)
+const success = ref(false)
 const error = ref('')
 
 const {value: email} = useField('email')
@@ -61,6 +62,8 @@ const onSubmit = handleSubmit(async (values) => {
             throw new Error(data.message || 'Registration failed')
         }
 
+        success.value = true;
+
         // Reset form on success
         resetForm()
         // redirect or success message
@@ -80,6 +83,10 @@ const onSubmit = handleSubmit(async (values) => {
 
         <div v-if="error" class="bg-red-50 text-red-600 p-4 rounded-lg mb-4">
             {{ error }}
+        </div>
+
+        <div v-if="success" class="bg-green-50 text-green-600 p-4 rounded-lg mb-4">
+            Registering successfully completed. Redirecting to home page....
         </div>
 
         <div>
