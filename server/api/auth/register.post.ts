@@ -10,12 +10,12 @@ export default defineEventHandler(async (event) => {
 
     const registerUser = RegisterUserRequest.constructFromJson(body as RegisterUserRequestInterface);
 
-    const validityInputs = registerUser.validateInputs();
+    const validityResults = registerUser.validateInputs();
 
-    if (validityInputs.valid) {
+    if (validityResults.valid) {
         throw createError({
             statusCode: 400,
-            message: validityInputs.message
+            message: validityResults.message
         })
     }
 
