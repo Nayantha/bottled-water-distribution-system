@@ -20,4 +20,8 @@ export class Customer {
         this.address = address;
         this.phone = phone;
     }
+
+    public static constructFromJson(customer: CustomerInterface) {
+        return new Customer(customer.id, customer.name, customer.email, customer.address, customer.phone);
+    }
 }
