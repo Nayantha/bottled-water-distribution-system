@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import * as yup from 'yup';
-import {useField, useForm} from "vee-validate";
-import {RegisterUserRequest} from "~/models/RegisterUserRequest";
-import {ref} from "vue";
-import type {ApiErrorInterface} from "~/models/APIError";
-import {APIError} from "~/models/APIError";
+import { useField, useForm } from "vee-validate";
+import { RegisterUserRequest } from "~/models/RegisterUserRequest";
+import { ref } from "vue";
+import type { ApiErrorInterface } from "~/models/APIError";
+import { APIError } from "~/models/APIError";
+import { User, UserInterface } from "~/models/User";
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Invalid email format'),
@@ -72,6 +73,10 @@ const onSubmit = handleSubmit(async (values) => {
 
             return;
         }
+
+        const data = await response.json();
+
+        const user = User.constructFromJson(data as UserInterface);
 
         success.value = true;
         // Reset form on success
