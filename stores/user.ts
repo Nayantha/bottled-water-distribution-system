@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('user', {
         clearStore() {
             this.customer = null
         },
-        setUser(newCustomer: Customer) {
+        setCustomer(newCustomer: Customer) {
             this.customer = newCustomer;
         }
     },
