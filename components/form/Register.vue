@@ -88,7 +88,7 @@ const onSubmit = handleSubmit(async (values) => {
         // Reset form on success
         resetForm()
         // redirect or success message
-        // await navigateTo('/')
+        await navigateTo('/')
 
     } catch (err: any) {
         error.value = err.message
