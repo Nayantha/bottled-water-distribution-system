@@ -1,7 +1,8 @@
 export interface RegisterUserRequestInterface {
     email: string;
     name: string;
-    username: string;
+    address: string;
+    phone: string;
     password: string;
 }
 
@@ -12,9 +13,10 @@ interface ValidationRule {
 
 interface ValidationFields {
     email: string;
-    password: string;
-    username: string;
     name: string;
+    address: string;
+    phone: string;
+    password: string;
 }
 
 export interface ValidationResult {
@@ -25,18 +27,20 @@ export interface ValidationResult {
 export class RegisterUserRequest {
     email: string;
     name: string;
-    username: string;
+    address: string;
+    phone: string;
     password: string;
 
-    constructor(email: string, name: string, username: string, password: string) {
+    constructor(email: string, name: string, address: string, password: string, phone: string) {
         this.email = email;
         this.name = name;
-        this.username = username;
+        this.address = address;
+        this.phone = phone;
         this.password = password;
     }
 
     public static constructFromJson(JsonBody: RegisterUserRequestInterface) {
-        return new RegisterUserRequest(JsonBody.email, JsonBody.name, JsonBody.username, JsonBody.password);
+        return new RegisterUserRequest(JsonBody.email, JsonBody.name, JsonBody.address, JsonBody.password, JsonBody.phone);
     }
 
     public validateInputs(this: ValidationFields): ValidationResult {
@@ -49,9 +53,13 @@ export class RegisterUserRequest {
                 validate: (value: string) => Boolean(value?.trim()),
                 message: 'Password is missing.'
             },
-            username: {
+            address: {
                 validate: (value: string) => Boolean(value?.trim()),
-                message: 'Username is missing.'
+                message: 'Address is missing.'
+            },
+            phone: {
+                validate: (value: string) => Boolean(value?.trim()),
+                message: 'Phone number is missing.'
             },
             name: {
                 validate: (value: string) => Boolean(value?.trim()),
