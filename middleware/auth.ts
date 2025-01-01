@@ -1,11 +1,10 @@
-import { storeToRefs } from 'pinia'
 import { useAuthStore } from "~/stores/user";
 
 const user = useAuthStore();
-const { isAuthenticated } = storeToRefs(user);
+const isAuthenticated = user.isLoggedIn;
 
 export default defineNuxtRouteMiddleware(() => {
-    if (!isAuthenticated.value) {
+    if (!isAuthenticated) {
         return navigateTo('/')
     }
 })
