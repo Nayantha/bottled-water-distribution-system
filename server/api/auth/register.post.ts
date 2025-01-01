@@ -1,6 +1,7 @@
 import { RegisterUserRequest, RegisterUserRequestInterface } from "~/models/RegisterUserRequest";
 import bcrypt from "bcrypt";
 import prisma from "~/utils/prisma";
+import { User, UserInterface } from "~/models/User";
 
 const SALT_ROUNDS = 10;
 
@@ -25,7 +26,7 @@ export default defineEventHandler(async (event) => {
         const hashedPassword = await bcrypt.hash(body.password, salt)
 
         // Create user
-        const user = await prisma.user.create({
+        const dbUser = await prisma.user.create({
             data: {
                 email: registerUser.email,
                 password: hashedPassword,
@@ -35,7 +36,7 @@ export default defineEventHandler(async (event) => {
             }
         });
 
-        // return user
+        return User.constructFromJson(dbUser as UserInterface)
 
     } catch (error: any) {
 
