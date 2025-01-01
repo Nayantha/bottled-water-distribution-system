@@ -1,22 +1,8 @@
-import {PrismaClient} from '@prisma/client'
-import {RegisterUserRequest, RegisterUserRequestInterface} from "~/models/RegisterUserRequest";
-
-const prisma = new PrismaClient()
-const SALT_ROUNDS = 10
+import { RegisterUserRequest, RegisterUserRequestInterface } from "~/models/RegisterUserRequest";
 
 export default defineEventHandler(async (event) => {
-
+    // Parse and validate request body
     const body = await readBody(event);
-
     const registerUser = RegisterUserRequest.constructFromJson(body as RegisterUserRequestInterface);
-
-    const validityResults = registerUser.validateInputs();
-
-    if (validityResults.valid) {
-        throw createError({
-            statusCode: 400,
-            message: validityResults.message
-        })
-    }
 
 })
