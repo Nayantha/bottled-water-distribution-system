@@ -29,11 +29,11 @@ const authStore = useAuthStore();
 const { handleSubmit, errors, resetForm } = useForm({
     validationSchema: schema,
     initialValues: {
-        email: 'email@mail.com',
-        password: '1234567890Az',
-        name: 'name1',
-        username: 'name1',
-        confirmPassword: '1234567890Az'
+        email: '',
+        password: '',
+        name: '',
+        username: '',
+        confirmPassword: ''
     }
 });
 
