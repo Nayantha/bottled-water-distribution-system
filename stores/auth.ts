@@ -15,7 +15,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     getters: {
-        isLoggedIn: (state) => !!state.customer
+        isLoggedIn: (state) => !!state.customer,
+        customerData: (state) => state.customer as Customer
     },
 
     persist: {
