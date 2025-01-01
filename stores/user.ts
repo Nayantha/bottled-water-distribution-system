@@ -1,21 +1,21 @@
-import type { User } from "~/models/User";
+import type { Customer } from "~/models/Customer";
 
 export const useAuthStore = defineStore('user', {
     state: () => ({
-        user: null as User | null,
+        customer: null as Customer | null,
     }),
 
     actions: {
-        clearUser() {
-            this.user = null
+        clearStore() {
+            this.customer = null
         },
-        setUser(newUser: User) {
-            this.user = newUser;
+        setUser(newCustomer: Customer) {
+            this.customer = newCustomer;
         }
     },
 
     getters: {
-        isLoggedIn: (state) => !!state.user
+        isLoggedIn: (state) => !!state.customer
     },
 
     persist: {
