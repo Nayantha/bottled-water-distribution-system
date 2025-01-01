@@ -5,7 +5,7 @@ import { RegisterUserRequest } from "~/models/RegisterUserRequest";
 import { ref } from "vue";
 import type { ApiErrorInterface } from "~/models/APIError";
 import { APIError } from "~/models/APIError";
-import { useAuthStore } from "~/stores/user";
+import { useAuthStore } from "~/stores/auth";
 import { Customer, CustomerInterface } from "~/models/Customer";
 
 const schema = yup.object({

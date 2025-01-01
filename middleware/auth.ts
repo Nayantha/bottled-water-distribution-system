@@ -1,4 +1,4 @@
-import { useAuthStore } from "~/stores/user";
+import { useAuthStore } from "~/stores/auth";
 
 const user = useAuthStore();
 const isAuthenticated = user.isLoggedIn;

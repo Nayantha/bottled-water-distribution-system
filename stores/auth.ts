@@ -1,6 +1,6 @@
 import type { Customer } from "~/models/Customer";
 
-export const useAuthStore = defineStore('user', {
+export const useAuthStore = defineStore('auth', {
     state: () => ({
         customer: null as Customer | null,
     }),
