@@ -5,8 +5,8 @@ import { RegisterUserRequest } from "~/models/RegisterUserRequest";
 import { ref } from "vue";
 import type { ApiErrorInterface } from "~/models/APIError";
 import { APIError } from "~/models/APIError";
-import { Customer, CustomerInterface } from "~/models/User";
 import { useAuthStore } from "~/stores/user";
+import { Customer, CustomerInterface } from "~/models/Customer";
 
 const schema = yup.object({
     name: yup.string().required('Name is required'),
@@ -58,7 +58,7 @@ const onSubmit = handleSubmit(async (values) => {
 
         const registerUserRequest = RegisterUserRequest.constructFromJson(values);
 
-        const response = await fetch('/api/auth/register', {
+        const response = await fetch('/api/customer/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
