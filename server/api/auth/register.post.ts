@@ -47,6 +47,14 @@ export default defineEventHandler(async (event) => {
             })
         }
 
+        // create errors handling
+        if (error.statusCode === 400) {
+            throw createError({
+                statusCode: 400,
+                message: error.message
+            })
+        }
+
         throw createError({
             statusCode: 500,
             message: 'An error occurred during registration.'
