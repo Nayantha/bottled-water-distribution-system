@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
         if (error.code === 'P2002') {
             throw createError({
                 statusCode: 400,
-                message: 'Email or username already exists.'
+                message: 'Email already exists.'
             })
         }
 
