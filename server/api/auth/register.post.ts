@@ -39,6 +39,14 @@ export default defineEventHandler(async (event) => {
 
     } catch (error: any) {
 
+        // prisma errors
+        if (error.code === 'P2002') {
+            throw createError({
+                statusCode: 400,
+                message: 'Email or username already exists.'
+            })
+        }
+
         throw createError({
             statusCode: 500,
             message: 'An error occurred during registration.'
