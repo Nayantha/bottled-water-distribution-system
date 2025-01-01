@@ -5,7 +5,7 @@ import { RegisterUserRequest } from "~/models/RegisterUserRequest";
 import { ref } from "vue";
 import type { ApiErrorInterface } from "~/models/APIError";
 import { APIError } from "~/models/APIError";
-import { User, UserInterface } from "~/models/User";
+import { Customer, CustomerInterface } from "~/models/User";
 import { useAuthStore } from "~/stores/user";
 
 const schema = yup.object({
@@ -30,12 +30,12 @@ const authStore = useAuthStore();
 const { handleSubmit, errors, resetForm } = useForm({
     validationSchema: schema,
     initialValues: {
-        email: '',
-        password: '',
-        name: '',
-        address: '',
-        phone: '',
-        confirmPassword: ''
+        email: 'mail@mail.com',
+        password: '1234567890AZ',
+        name: 'my name',
+        address: '271, bogus street, downtown',
+        phone: '+94012365498',
+        confirmPassword: '1234567890AZ'
     }
 });
 
@@ -82,7 +82,7 @@ const onSubmit = handleSubmit(async (values) => {
 
         const data = await response.json();
 
-        const user = User.constructFromJson(data as UserInterface);
+        const user = Customer.constructFromJson(data as CustomerInterface);
 
         // setup pinia store data
         authStore.setUser(user);
