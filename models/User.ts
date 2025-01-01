@@ -17,4 +17,8 @@ export class User {
         this.email = email;
         this.id = id;
     }
+
+    public static constructFromJson(user: UserInterface) {
+        return new User(user.name, user.username, user.email, user.id);
+    }
 }
