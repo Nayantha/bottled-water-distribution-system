@@ -82,10 +82,10 @@ const onSubmit = handleSubmit(async (values) => {
 
         const data = await response.json();
 
-        const user = Customer.constructFromJson(data as CustomerInterface);
+        const customer = Customer.constructFromJson(data as CustomerInterface);
 
         // setup pinia store data
-        authStore.setUser(user);
+        authStore.setCustomer(customer);
 
         success.value = true;
         // Reset form on success
