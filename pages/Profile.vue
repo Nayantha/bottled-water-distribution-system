@@ -1,8 +1,7 @@
 <template>
     <div>
-        <div v-if="authStore.isLoggedIn">
-            Welcome, {{ authStore.customer.name }}
-            {{ authStore.customer.id }}
+        <div v-if="isLoggedIn">
+            Welcome, {{ customer?.name }} {{ customer?.id }}
         </div>
         <div v-else>
             Loading...
@@ -14,6 +13,7 @@
 import { useAuthStore } from "~/stores/auth";
 
 const authStore = useAuthStore();
+const { customer, isLoggedIn } = storeToRefs(authStore)
 </script>
 
 <style scoped>
