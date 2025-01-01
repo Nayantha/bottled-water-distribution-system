@@ -1,9 +1,11 @@
 <template>
     <div>
-        <div v-if="authStore.user.value!!">Loading...</div>
+        <div v-if="authStore.isLoggedIn">
+            Welcome, {{ authStore.customer.name }}
+            {{ authStore.customer.id }}
+        </div>
         <div v-else>
-            Welcome, {{ authStore.user.name }}
-            {{ authStore.user.id }}
+            Loading...
         </div>
     </div>
 </template>
