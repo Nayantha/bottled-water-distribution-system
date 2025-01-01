@@ -5,4 +5,13 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const registerUser = RegisterUserRequest.constructFromJson(body as RegisterUserRequestInterface);
 
+    // validate inputs
+    const validityResults = registerUser.validateInputs()
+
+    if (!validityResults.valid) {
+        throw createError({
+            statusCode: 400,
+            message: validityResults.message
+        })
+    }
 })
