@@ -22,9 +22,11 @@ const schema = yup.object({
     confirmPassword: yup.string()
         .required('Please confirm your password')
         .oneOf([yup.ref('password')], 'Passwords must match')
-})
+});
 
-const {handleSubmit, errors, resetForm} = useForm({
+const authStore = useAuthStore();
+
+const { handleSubmit, errors, resetForm } = useForm({
     validationSchema: schema,
     initialValues: {
         email: 'email@mail.com',
@@ -33,17 +35,17 @@ const {handleSubmit, errors, resetForm} = useForm({
         username: 'name1',
         confirmPassword: '1234567890Az'
     }
-})
+});
 
-const loading = ref(false)
-const success = ref(false)
-const error = ref('')
+const loading = ref(false);
+const success = ref(false);
+const error = ref('');
 
-const {value: email} = useField('email')
-const {value: username} = useField('username')
-const {value: name} = useField('name')
-const {value: password} = useField('password')
-const {value: confirmPassword} = useField('confirmPassword')
+const { value: email } = useField('email');
+const { value: username } = useField('username');
+const { value: name } = useField('name');
+const { value: password } = useField('password');
+const { value: confirmPassword } = useField('confirmPassword');
 
 const onSubmit = handleSubmit(async (values) => {
 
@@ -79,8 +81,7 @@ const onSubmit = handleSubmit(async (values) => {
 
         const user = User.constructFromJson(data as UserInterface);
 
-        // update pinia store
-        const authStore = useAuthStore();
+        // setup pinia store data
         authStore.setUser(user);
 
         success.value = true;
@@ -94,7 +95,7 @@ const onSubmit = handleSubmit(async (values) => {
     } finally {
         loading.value = false
     }
-})
+});
 
 </script>
 
