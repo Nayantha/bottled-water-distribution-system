@@ -6,6 +6,7 @@ import { ref } from "vue";
 import type { ApiErrorInterface } from "~/models/APIError";
 import { APIError } from "~/models/APIError";
 import { User, UserInterface } from "~/models/User";
+import { useAuthStore } from "~/stores/user";
 
 const schema = yup.object({
     email: yup.string().required('Email is required').email('Invalid email format'),
@@ -77,6 +78,10 @@ const onSubmit = handleSubmit(async (values) => {
         const data = await response.json();
 
         const user = User.constructFromJson(data as UserInterface);
+
+        // update pinia store
+        const authStore = useAuthStore();
+        authStore.setUser(user);
 
         success.value = true;
         // Reset form on success
