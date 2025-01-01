@@ -10,8 +10,7 @@ datasource db {
 model Customer {
   id String @id @default(uuid())
 
-  email    String @unique @db.VarChar(30)
-  username String @unique @db.VarChar(15)
+  email String @unique @db.VarChar(30)
 
   name    String @db.VarChar(30)
   address String @db.VarChar(50)
@@ -23,6 +22,4 @@ model Customer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@unique([username, email])
 }
