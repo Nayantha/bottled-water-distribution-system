@@ -9,11 +9,12 @@ import { User, UserInterface } from "~/models/User";
 import { useAuthStore } from "~/stores/user";
 
 const schema = yup.object({
-    email: yup.string().required('Email is required').email('Invalid email format'),
-    username: yup.string()
-        .required('Username is required')
-        .min(5, 'Username must be at least 5 characters'),
     name: yup.string().required('Name is required'),
+    email: yup.string().required('Email is required').email('Invalid email format'),
+    address: yup.string()
+        .required('address is required')
+        .min(5, 'Username must be at least 5 characters'),
+    phone: yup.string().required('phone number is required.'),
     password: yup.string()
         .required('Password is required')
         .min(8, 'Password must be at least 8 characters')
@@ -32,7 +33,8 @@ const { handleSubmit, errors, resetForm } = useForm({
         email: '',
         password: '',
         name: '',
-        username: '',
+        address: '',
+        phone: '',
         confirmPassword: ''
     }
 });
@@ -42,10 +44,11 @@ const success = ref(false);
 const error = ref('');
 
 const { value: email } = useField('email');
-const { value: username } = useField('username');
 const { value: name } = useField('name');
-const { value: password } = useField('password');
+const { value: address } = useField('address');
+const { value: phone } = useField('phone');
 const { value: confirmPassword } = useField('confirmPassword');
+const { value: password } = useField('password');
 
 const onSubmit = handleSubmit(async (values) => {
 
@@ -130,22 +133,41 @@ const onSubmit = handleSubmit(async (values) => {
         </div>
 
         <div>
-            <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="username">
-                Username
+            <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="address">
+                Address
             </label>
             <div class="mt-2">
                 <input
-                    id="username"
-                    v-model="username"
-                    :class="{ 'border-red-500': errors.username }"
-                    autocomplete="username"
+                    id="address"
+                    v-model="address"
+                    :class="{ 'border-red-500': errors.address }"
+                    autocomplete="address"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    name="username"
+                    name="address"
                     required
                     type="text"
                 />
             </div>
-            <p v-if="errors.username" class="mt-1 text-sm text-red-600">{{ errors.username }}</p>
+            <p v-if="errors.address" class="mt-1 text-sm text-red-600">{{ errors.address }}</p>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium leading-6 text-default-dark dark:text-default-light" for="phone">
+                Phone Number
+            </label>
+            <div class="mt-2">
+                <input
+                    id="phone"
+                    v-model="phone"
+                    :class="{ 'border-red-500': errors.phone }"
+                    autocomplete="phone"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    name="phone"
+                    required
+                    type="text"
+                />
+            </div>
+            <p v-if="errors.phone" class="mt-1 text-sm text-red-600">{{ errors.phone }}</p>
         </div>
 
         <div>
