@@ -1,7 +1,7 @@
-import { RegisterUserRequest, RegisterUserRequestInterface } from "~/models/RegisterUserRequest";
+import { RegisterUserRequest, RegisterUserRequestInterface } from "~/types/RegisterUserRequest";
 import bcrypt from "bcrypt";
 import prisma from "~/utils/prisma";
-import { Customer, CustomerInterface } from "~/models/Customer";
+import { Customer, CustomerInterface } from "~/types/Customer";
 
 const SALT_ROUNDS = 10;
 
