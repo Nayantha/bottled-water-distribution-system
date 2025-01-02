@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import * as yup from 'yup';
 import { useField, useForm } from "vee-validate";
-import { RegisterUserRequest } from "~/models/RegisterUserRequest";
+import { RegisterUserRequest } from "~/types/RegisterUserRequest";
 import { ref } from "vue";
-import type { ApiErrorInterface } from "~/models/APIError";
-import { APIError } from "~/models/APIError";
+import type { ApiErrorInterface } from "~/types/APIError";
+import { APIError } from "~/types/APIError";
 import { useAuthStore } from "~/stores/auth";
-import { Customer, CustomerInterface } from "~/models/Customer";
+import { Customer, CustomerInterface } from "~/types/Customer";
 
 const schema = yup.object({
     name: yup.string().required('Name is required'),
