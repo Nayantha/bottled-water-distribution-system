@@ -3,7 +3,7 @@ export interface TokenInterface {
     refreshToken: string;
 }
 
-class Token implements TokenInterface {
+export default class Token implements TokenInterface {
     public readonly accessToken: string;
     public readonly refreshToken: string;
 
