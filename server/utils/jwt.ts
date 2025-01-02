@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import Token from "~/types/Tokens";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
 const REFRESH_SECRET = process.env.REFRESH_SECRET || 'your-refresh-secret'
@@ -10,7 +11,7 @@ export const generateJWTSecret = () => {
     return crypto.randomBytes(64).toString('hex');
 }
 
-export const generateTokens = (userId: string) => {
+export const generateTokens = (userId: string): Token => {
     const accessToken = jwt.sign(
         { userId, type: 'access' },
         JWT_SECRET,
@@ -22,7 +23,7 @@ export const generateTokens = (userId: string) => {
         { expiresIn: REFRESH_EXPIRES_IN }
     )
 
-    return { accessToken, refreshToken }
+    return new Token(accessToken, refreshToken)
 }
 
 export const verifyToken = (token: string) => {
