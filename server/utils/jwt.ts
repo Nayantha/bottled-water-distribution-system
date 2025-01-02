@@ -10,7 +10,7 @@ export const generateJWTSecret = () => {
     return crypto.randomBytes(64).toString('hex');
 }
 
-export const generateToken = (userId: string) => {
+export const generateTokens = (userId: string) => {
     const accessToken = jwt.sign(
         { userId, type: 'access' },
         JWT_SECRET,
