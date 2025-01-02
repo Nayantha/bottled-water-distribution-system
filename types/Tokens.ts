@@ -11,4 +11,8 @@ class Token implements TokenInterface {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
+
+    public static constructFromJson(JsonObj: TokenInterface): Token {
+        return new Token(JsonObj.accessToken, JsonObj.refreshToken);
+    }
 }
