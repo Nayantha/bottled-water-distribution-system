@@ -6,7 +6,7 @@ export interface CustomerInterface {
     phone: string;
 }
 
-export class Customer {
+export class Customer implements CustomerInterface {
     public readonly id: string;
     public readonly name: string;
     public readonly email: string;
