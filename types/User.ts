@@ -5,7 +5,7 @@ export interface UserInterface {
     id: string;
 }
 
-export class User {
+export class User implements UserInterface {
     public readonly name: string;
     public readonly username: string;
     public readonly email: string;
