@@ -4,7 +4,7 @@ export interface ApiErrorInterface {
     url: string;
 }
 
-export class APIError extends Error {
+export class APIError extends Error implements ApiErrorInterface {
     public readonly statusCode: number;
     public readonly url: string;
 
