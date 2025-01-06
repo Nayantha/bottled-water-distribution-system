@@ -25,11 +25,11 @@ export interface ValidationResult {
 }
 
 export class RegisterUserRequest implements RegisterUserRequestInterface {
-    email: string;
-    name: string;
-    address: string;
-    phone: string;
-    password: string;
+    public readonly email: string;
+    public readonly name: string;
+    public readonly address: string;
+    public readonly phone: string;
+    public readonly password: string;
 
     constructor(email: string, name: string, address: string, password: string, phone: string) {
         this.email = email;
