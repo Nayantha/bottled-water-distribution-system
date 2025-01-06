@@ -24,7 +24,7 @@ export interface ValidationResult {
     message: string;
 }
 
-export class RegisterUserRequest {
+export class RegisterUserRequest implements RegisterUserRequestInterface {
     email: string;
     name: string;
     address: string;
